@@ -1,3 +1,12 @@
+
+##### 配置要求
+| 系统版本 | 驱动版本 | 
+| :----:| :----: | 
+| ubuntu 18.04.5 | nvidia-driver-470 | 
+##### 参考链接：
+1. https://blog.csdn.net/weixin_39275295/article/details/108158498
+2. https://old-releases.ubuntu.com/releases/18.04.5/ubuntu-18.04.5-desktop-amd64.iso
+
 ###### 1.安装编译环境
 ```shell
 sudo apt-get install build-essential -y
@@ -27,11 +36,10 @@ lsmod | grep nouveau #无返回结果说明禁用成功
 
 ```
 
-###### 3.安装NVIDIA官方下载驱动 NVIDIA-Linux-x86_64-515.65.01.run
+###### 3.安装NVIDIA驱动
 ```shell
 
-sudo chmod +x NVIDIA-Linux-x86_64-515.65.01.run
-./NVIDIA-Linux-x86_64-515.65.01.run
+apt install nvidia-driver-470 -y
 
 ```
 ###### 4.安装指定版本的cuda
