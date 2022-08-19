@@ -3,9 +3,17 @@
 | 系统版本 | 驱动版本 | 
 | :----:| :----: | 
 | ubuntu 18.04.5 | nvidia-driver-470 | 
-##### 参考链接：
+
+##### 操作系统安装包：
+1. https://old-releases.ubuntu.com/releases/18.04.5/ubuntu-18.04.5-desktop-amd64.iso
+
+##### 参考文档：
 1. https://blog.csdn.net/weixin_39275295/article/details/108158498
-2. https://old-releases.ubuntu.com/releases/18.04.5/ubuntu-18.04.5-desktop-amd64.iso
+
+##### cudnn安装包：
+1. https://developer.nvidia.cn/rdp/cudnn-archive
+选择含有11.2的三个deb包
+<img width="1345" alt="image" src="https://user-images.githubusercontent.com/18545145/185547490-066be375-64df-401e-83af-a330c316a6ac.png">
 
 ###### 1.安装编译环境
 ```shell
@@ -62,4 +70,29 @@ export PATH=$PATH:/usr/local/cuda-11.2/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda-11.2/lib64
 
+source ~/.bashrc
+
 ```
+
+###### 5.安装cudnn
+```shell
+1.安装参考链接
+https://blog.chintsan.com/archives/561
+
+2.FAQ参考链接
+https://blog.csdn.net/xhw205/article/details/116297555
+
+sudo dpkg -i libcudnn8_8.1.1.33-1+cuda11.2_amd64.deb 
+sudo dpkg -i libcudnn8-dev_8.1.1.33-1+cuda11.2_amd64.deb 
+sudo dpkg -i libcudnn8-samples_8.1.1.33-1+cuda11.2_amd64.deb
+
+3.验证
+cp -r /usr/src/cudnn_samples_v8 ~
+cd ~/cudnn_samples_v8/mnistCUDNN
+make clean
+make
+./mnistCUDNN
+
+
+```
+
