@@ -1,14 +1,17 @@
 
-##### 配置要求
+##### 2080TI训练服务器部署，配置要求
 | 系统版本 | 驱动版本 | 
 | :----:| :----: | 
-| ubuntu 18.04.5 | nvidia-driver-470 | 
+| ubuntu 18.04.5 | nvidia-driver-515 | 
 
 ##### 操作系统安装包：
 1. https://old-releases.ubuntu.com/releases/18.04.5/ubuntu-18.04.5-desktop-amd64.iso
 
 ##### 参考文档：
 1. https://blog.csdn.net/weixin_39275295/article/details/108158498
+
+##### cuda安装包:
+1.https://developer.nvidia.com/cuda-11-0-2-download-archive
 
 ##### cudnn安装包：
 1. https://developer.nvidia.cn/rdp/cudnn-archive
@@ -46,8 +49,27 @@ lsmod | grep nouveau #无返回结果说明禁用成功
 
 ###### 3.安装NVIDIA驱动
 ```shell
+1.使用 ubuntu-drivers devices 命令查看当前系统推荐nvidia官方驱动
 
-apt install nvidia-driver-470 -y
+
+ubuntu-drivers devices
+
+== /sys/devices/pci0000:00/0000:00:01.1/0000:02:00.0 ==
+modalias : pci:v000010DEd00001E07sv00001458sd000037A9bc03sc00i00
+vendor   : NVIDIA Corporation
+driver   : nvidia-driver-470-server - distro non-free
+driver   : nvidia-driver-418-server - distro non-free
+driver   : nvidia-driver-515 - distro non-free
+driver   : nvidia-driver-470 - distro non-free
+driver   : nvidia-driver-510 - distro non-free
+driver   : nvidia-driver-450-server - distro non-free
+driver   : nvidia-driver-510-server - distro non-free
+driver   : nvidia-driver-515-server - distro non-free recommended
+driver   : xserver-xorg-video-nouveau - distro free builtin
+
+2.选择推荐的版本（选择不带server因为我们那是ubuntu-desktop版本的，最高版本的驱动即这里的 nvidia-driver-515）
+
+apt install nvidia-driver-515 -y
 
 ```
 ###### 4.安装指定版本的cuda
@@ -59,7 +81,7 @@ sudo apt-key add /var/cuda-repo-ubuntu1804-11-2-local/7fa2af80.pub
 sudo apt-get update
 sudo apt-get -y install cuda
 
-//通过run文件安装
+//通过run文件安装（推荐）
 sudo chmod +x cuda_11.2.2_460.32.03_linux.run
 sudo sh cuda_11.2.2_460.32.03_linux.run
 
